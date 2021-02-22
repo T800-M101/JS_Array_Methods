@@ -1,6 +1,7 @@
 /////// REDUCE Method //////////////
 // Excutes a callback function over the elements of the array 
 // and returns one output single value. It receives a callback and an initial value
+// the initial value might be wahtever we need 
 
 //EJEMPLO 1 - Sumando numeros
 // const numbers = [1,2,3,4,5,6,7,8];
@@ -13,41 +14,56 @@
 
 // console.log(total);
 
+// FORMA ALTERNATIVA DE SUMAR NUMEROS
+//const numbers = [10,0,50,125,75,6,3];
 
-
-
-//EJEMPLO 2 - Sumando numeros
-
-// const numbers = [2,5,2,4,7,4,67,3,2,5,7,5];
-
-// const total = numbers.reduce((acc,item) => acc + item, 0);
-
-// console.log(total);
-
-// const numbers = [1,2,3,4,6,34,46,66,7,0];
+// const suma = numbers.reduce((acc,item) => acc += item);
+// console.log(suma);
 
 
 
 
+//EJEMPLO 2  - Extrayendo el numero mayor
 
-//EJEMPLO 3  - Extrayendo el numero mayor
-// const max = numbers.reduce(callback,-Infinity);
+//   //El acumulador inicia en 0 y se compara como el primer numero del array
+//   //si el acumulador es mayor se retorna a la const 'max'
+//    //si el numero es mayor se retorna a la const 'max
 
-// function callback(accumulator, value){
-//      if(accumulator > value){
-//          return accumulator;
-//      }else{
-//          return value;
-//      }
-// }
-
-// console.log(max);
+// const numbers = [1,3,2,4,6,34,46,66,7,0];
 
 
+// const max = numbers.reduce((acc,number) => {
+
+//        if(acc > number){
+       
+//         return acc;
+          
+//       }else {
+       
+//         return number;
+//       }
+      
+//    },0);
+//    console.log(max);
+  
+ 
+
+
+// FORMA ALTERNATIVA
+
+// const max = numbers.reduce((acc,item)=>{
+//   return  Math.max(acc, item);
+// },0);
+//console.log(max);
+
+// FORMA SIMPLIFICADA
+//const max = numbers.reduce((acc,item) => Math.max(acc,item));
 
 
 
-//EJEMPLO 4 - Sumatoria de valores en un array de objetos
+
+
+//EJEMPLO 3 - Sumatoria de valores en un array de objetos
 // const store = [
 //     {
 //         product: 'laptop',
@@ -74,7 +90,7 @@
 
 
 
-//EJEMPLO 5 - Indexando con el metodo reduce
+//EJEMPLO 4 - Indexando con el metodo reduce
 
 // const mascotas = [
 //     {nombre: 'Pelusa', edad: 12, tipo: 'gato'},
@@ -83,12 +99,13 @@
 //     {nombre: 'Chanchito feliz', edad: 3, tipo: 'perro'},
 // ];
 
-// const indexed = mascotas.reduce((acc, mascota) => ({...acc,[mascota.nombre]:mascota,}),{});
-// console.log(indexed);{nombre: 'Marcos', edad:10}
+// const indexed = mascotas.reduce((acc, mascota) => ({...acc,[mascota.nombre]:mascota}),{});
+// console.log(indexed);
 
 
 
-//EJEMPLO
+
+//EJEMPLO 5
 
 // const aninado = [1,[2,3],4,[5]];
 
@@ -96,30 +113,32 @@
 // console.log(plano);
 
 
-//EJEMPLO 5
+
+//EJEMPLO 6 - sumando dades de personas
 // const people = [
 //     {nombre: 'Marcos', edad:15},
 //     {nombre: 'Lena', edad:10}
 // ];
 
-//const res = people.reduce((acc, item)=> acc += item.edad,0);
-//const strings = ['Mi', 'nombre', 'es', 'Marcos'];
-
-//const res = strings.reduce((acc, item)=> acc += ' ' + item,'Hola');
+// const sumaEdades = people.reduce((acc, person)=> acc += person.edad,0);
+// console.log(sumaEdades);
 
 
-//EJEMPLO 6 
-//const numbers = [10,0,50,125,75,6,3];
-
-// const res = numbers.reduce((acc,item)=>{
-//   return  Math.max(acc, item);
-// },0);
-
-//const res = numbers.reduce((acc,item) => Math.max(acc,item));
-//const res = numbers.reduce((acc,item) => acc += item);
 
 
-//EJEMPLO 7
+// EJEMPLO 7 - concatenando strings
+// const strings = ['Mi', 'nombre', 'es', 'Marcos'];
+
+// //El acumulador es el string inicial 'Hola'
+
+// const saludo = strings.reduce((acc, palabra)=> acc += ' ' + palabra,'Hola');
+// console.log(saludo);
+
+
+
+
+
+//EJEMPLO 8
 // const almuerzos = [
 //     {principal: 'arepa', postre:'helado'},
 //     {principal: 'tacos', postre:'torta de queso'},
@@ -130,8 +149,8 @@
 // ];
 
 
-// const res = almuerzos.reduce((acc,item) => {
-//      if(item.principal === 'arepa'){
+// const arepas = almuerzos.reduce((acc,almuerzo) => {
+//      if(almuerzo.principal === 'arepa'){
 //         return acc + 1;
 //      }else {
 //          return acc;
@@ -140,10 +159,12 @@
     
 // },0);
 
-// console.log(res);
+// console.log(arepas);
 
-//EJEMPLO 8
-// We nees an array [ first name, last name] of all users only if:
+
+
+//EJEMPLO 9
+// We need an array [ first name, last name] of all users only if:
 // 1. they are in their tweinties
 // 2. Their full names are 10 characters or more.
 
@@ -172,6 +193,7 @@
 //      age: 22},
 // ];
 
+// USANDO CHAINING METHODS
 // const res = users.filter(user => user.age >= 20 && user.age < 30)
 //                  .map(user => `${user.firstName} ${user.lastName}`)
 //                  .filter(fullName => fullName.length >= 10);
@@ -184,6 +206,8 @@
  
 //const res = users.filter(isInTwenties).map(makeFullName).filter(isAtLeastTenChars);
 
+
+// USANDO REDUCE 
 // const res = users.reduce((acc,user) => {
 //     const fullName = makeFullName(user);
 //     if(isInTwenties(user) && isAtLeastTenChars(fullName)){
@@ -193,7 +217,7 @@
 // },[]);
 
 
-//EJEMPLO 9
+//EJEMPLO 10 - Buscando una palabra en un array de objetos
 
 // const fruits = [
 //     {name:'apples', quantity: 2, id:0},
@@ -210,18 +234,20 @@
 // console.log(thisShitIsBananas);
 
 
-//EJEMPLO 10
+//EJEMPLO 11 - Concatenando strings usando template strings
 
 // const res = users.reduce((acc,user)=> `${acc}${user.firstName} ${user.lastName}\n`,'');
 // console.log(res);
 
+
+//EJEMPLO 12 / Calculando el factorial
 
 // const numbers = [5,4,3,2,1];
 // const factorial = numbers.reduce((acc,number)=> acc += number);
 // console.log(factorial);
 
 
-//EJEMPLO 11 - Filtrar individuis por ciertas condiciones
+//EJEMPLO 13 - Filtrar individuos por ciertas condiciones
 
 /*
 Estudiantes de una universidad de cuyo nombre no quiero acordarme, realizo un estudio para determinar
@@ -240,36 +266,36 @@ Lonchera: 1 kilo (Comen mucho) :v
 */
 
 //Datos de ejercisio
-const alumnos = [
-  {
-    nombre: 'Oscar',
-    bolso: ['Cuaderno','Cuaderno','Cuaderno','Cuaderno','Lapiz','Lapiz']
-  },
-  {
-    nombre: 'Maria',
-    bolso: ['Cuaderno','Cuaderno','Cartilla','Lapiz','Lapiz']
-  },
-  {
-    nombre: 'Miguel',
-    bolso: ['Cartilla','Cartilla','Lapiz','Lonchera']
-  },
-  {
-    nombre: 'Sandra',
-    bolso: ['Cuaderno','Lapiz','Lonchera']
-  },
-  {
-    nombre: 'David',
-    bolso: ['Cuaderno','Trabajo de ciencias','Lapiz']
-  },
-  {
-    nombre: 'Tatiana',
-    bolso: ['Trabajo de ciencias','Lapiz']
-  },
-  {
-    nombre: 'Fernando',
-    bolso: ['Lapiz','Lonchera','Lonchera'],
-  }
-];
+// const alumnos = [
+//   {
+//     nombre: 'Oscar',
+//     bolso: ['Cuaderno','Cuaderno','Cuaderno','Cuaderno','Lapiz','Lapiz']
+//   },
+//   {
+//     nombre: 'Maria',
+//     bolso: ['Cuaderno','Cuaderno','Cartilla','Lapiz','Lapiz']
+//   },
+//   {
+//     nombre: 'Miguel',
+//     bolso: ['Cartilla','Cartilla','Lapiz','Lonchera']
+//   },
+//   {
+//     nombre: 'Sandra',
+//     bolso: ['Cuaderno','Lapiz','Lonchera']
+//   },
+//   {
+//     nombre: 'David',
+//     bolso: ['Cuaderno','Trabajo de ciencias','Lapiz']
+//   },
+//   {
+//     nombre: 'Tatiana',
+//     bolso: ['Trabajo de ciencias','Lapiz']
+//   },
+//   {
+//     nombre: 'Fernando',
+//     bolso: ['Lapiz','Lonchera','Lonchera'],
+//   }
+// ];
 
 
 
