@@ -26,8 +26,8 @@
 //EJEMPLO 2  - Extrayendo el numero mayor
 
 //   //El acumulador inicia en 0 y se compara como el primer numero del array
-//   //si el acumulador es mayor se retorna a la const 'max'
-//    //si el numero es mayor se retorna a la const 'max
+//   //si el acumulador es mayor que el numero el acumulador conserve su valir
+//    //si el numero es mayor el acumulador toma el valir del numero
 
 // const numbers = [1,3,2,4,6,34,46,66,7,0];
 
